@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FinalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="activity">
+          <Key>
+            <PropertyRef Name="activity_ID" />
+          </Key>
+          <Property Name="activity_ID" Type="int" Nullable="false" />
+          <Property Name="user_ID" Type="int" />
+          <Property Name="activity_Title" Type="varchar" MaxLength="50" />
+          <Property Name="activity_Description" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="user_ID" />
+          </Key>
+          <Property Name="user_ID" Type="int" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="50" />
+          <Property Name="lastname" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <Association Name="FK_activity_activity">
+          <End Role="activity" Type="Self.activity" Multiplicity="1" />
+          <End Role="activity1" Type="Self.activity" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="activity">
+              <PropertyRef Name="activity_ID" />
+            </Principal>
+            <Dependent Role="activity1">
+              <PropertyRef Name="activity_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_activity_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="activity" Type="Self.activity" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_ID" />
+            </Principal>
+            <Dependent Role="activity">
+              <PropertyRef Name="activity_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FinalModelStoreContainer">
+          <EntitySet Name="activity" EntityType="Self.activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_activity_activity" Association="Self.FK_activity_activity">
+            <End Role="activity" EntitySet="activity" />
+            <End Role="activity1" EntitySet="activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_activity_Users" Association="Self.FK_activity_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="activity" EntitySet="activity" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FinalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="activity">
+          <Key>
+            <PropertyRef Name="activity_ID" />
+          </Key>
+          <Property Name="activity_ID" Type="Int32" Nullable="false" />
+          <Property Name="user_ID" Type="Int32" />
+          <Property Name="activity_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="activity_Description" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="activity1" Relationship="Self.FK_activity_activity" FromRole="activity" ToRole="activity1" />
+          <NavigationProperty Name="activity2" Relationship="Self.FK_activity_activity" FromRole="activity1" ToRole="activity" />
+          <NavigationProperty Name="User" Relationship="Self.FK_activity_Users" FromRole="activity" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="user_ID" />
+          </Key>
+          <Property Name="user_ID" Type="Int32" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="activity" Relationship="Self.FK_activity_Users" FromRole="Users" ToRole="activity" />
+        </EntityType>
+        <Association Name="FK_activity_activity">
+          <End Role="activity" Type="Self.activity" Multiplicity="1" />
+          <End Role="activity1" Type="Self.activity" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="activity">
+              <PropertyRef Name="activity_ID" />
+            </Principal>
+            <Dependent Role="activity1">
+              <PropertyRef Name="activity_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_activity_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="activity" Type="Self.activity" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_ID" />
+            </Principal>
+            <Dependent Role="activity">
+              <PropertyRef Name="activity_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FinalContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="activities" EntityType="Self.activity" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_activity_activity" Association="Self.FK_activity_activity">
+            <End Role="activity" EntitySet="activities" />
+            <End Role="activity1" EntitySet="activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_activity_Users" Association="Self.FK_activity_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="activity" EntitySet="activities" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FinalModelStoreContainer" CdmEntityContainer="FinalContext">
+          <EntitySetMapping Name="activities">
+            <EntityTypeMapping TypeName="FinalModel.activity">
+              <MappingFragment StoreEntitySet="activity">
+                <ScalarProperty Name="activity_ID" ColumnName="activity_ID" />
+                <ScalarProperty Name="user_ID" ColumnName="user_ID" />
+                <ScalarProperty Name="activity_Title" ColumnName="activity_Title" />
+                <ScalarProperty Name="activity_Description" ColumnName="activity_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FinalModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="user_ID" ColumnName="user_ID" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
