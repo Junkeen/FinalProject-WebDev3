@@ -1,0 +1,91 @@
+﻿@model FinalWebDev3.Models.User
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.firstname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+      
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+
+    <div class="create">
+        <div class="back"> <input type="submit" value="Delete" class="btn btn-default" /> |</div>
+        <div class="back">
+
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+   
+        <style>
+            .back input,
+            .back a {
+                font-size: 18px;
+                background-color: #22BBEA;
+                color: #ffffff;
+                text-align: center;
+                padding-inline: 10px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                border-radius: 5px;
+                text-decoration: none;
+            }
+
+            .create {
+                display: flex;
+                flex-direction: row;
+                align-items:center;
+            }
+
+
+            .back a:hover {
+                background: black;
+            }
+        </style>
+    }
+</div>

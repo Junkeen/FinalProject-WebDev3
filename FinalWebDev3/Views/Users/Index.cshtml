@@ -1,0 +1,142 @@
+﻿@model IEnumerable<FinalWebDev3.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .table th {
+        background-color: #22BBEA;
+        color:#ffffff;
+    }
+
+    .table td {
+        font-weight: normal;
+    }
+
+        .table td:last-child {
+            text-align: center;
+        }
+
+    .table a {
+        margin-right: 5px;
+        display: inline-block;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        text-decoration: none;
+        color: #176B87;
+    }
+
+        .table a.edit-btn {
+            background-color: #176B87;
+            color: #fff;
+        }
+
+        .table a.details-btn {
+            background-color: #176B87;
+        }
+
+        .table a.delete-btn {
+            background-color: #176B87;
+            color: #fff;
+        }
+
+        .table a:hover {
+            text-decoration: none;
+            background-color: #64CCC5;
+        }
+        .btn-index a{
+            background:#22BBEA;
+            color:#ffffff;
+            font-weight:bold;
+        }
+        .create-user a{
+            font-size:18px;
+            background-color: #22BBEA;
+            color:#ffffff;
+            text-align:center;
+            padding-inline:10px;
+            padding-top:10px;
+            padding-bottom:10px;
+            border-radius:5px;
+            text-decoration:none;
+        }
+        .create-user{
+            padding:1%;
+            align-items:center;
+
+        }
+
+        .create-user a:hover{
+            background:black;
+        }
+
+
+</style>
+
+<div class="create-user">
+    @Html.ActionLink("Create New", "Create")
+</div>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.password)
+        </th>
+   
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.password)
+        </td>
+    
+        <td class="btn-index">
+            @Html.ActionLink("Edit", "Edit", new { id=item.user_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.user_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.user_ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,103 @@
+﻿@model FinalWebDev3.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+
+    h2 {
+        color: #176B87; /* Heading color */
+    }
+
+    hr {
+        border-color: #176B87; /* Horizontal rule color */
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #176B87;
+    }
+
+    th {
+        color: #176B87; /* Table header color */
+    }
+
+    .form-row {
+        margin-bottom: 10px;
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: #176B87;
+        width: 120px;
+        display: inline-block;
+    }
+
+    .form-input {
+        width: calc(100% - 130px);
+        padding: 8px;
+        border: 1px solid #176B87;
+        border-radius: 5px;
+    }
+
+    .create {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .back a {
+        font-size: 18px;
+        background-color: #22BBEA;
+        color: #ffffff;
+        text-align: center;
+        padding-inline: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .back {
+        align-items: center;
+    }
+
+        .back a:hover {
+            background: black;
+        }
+</style>
+<h2>Details</h2>
+<form>
+    <table>
+        <tr class="form-row">
+            <th><label class="form-label" for="firstname">First Name</label></th>
+            <td><input class="form-input" type="text" id="firstname" value="@Model.firstname" readonly></td>
+        </tr>
+        <tr class="form-row">
+            <th><label class="form-label" for="lastname">Last Name</label></th>
+            <td><input class="form-input" type="text" id="lastname" value="@Model.lastname" readonly></td>
+        </tr>
+        <tr class="form-row">
+            <th><label class="form-label" for="email">Email</label></th>
+            <td><input class="form-input" type="text" id="email" value="@Model.email" readonly></td>
+        </tr>
+        <tr class="form-row">
+            <th><label class="form-label" for="password">Password</label></th>
+            <td><input class="form-input" type="password" id="password" value="@Model.password" readonly></td>
+        </tr>
+    </table>
+    
+</form>
+<div class="create">
+    <div class="back">@Html.ActionLink("Edit", "Edit", new { id = Model.user_ID }) |</div>
+    <div class="back">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
